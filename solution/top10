@@ -1,4 +1,18 @@
 #! /bin/bash
+lines=$(cut -f1,11 -d" " $1 | grep '"-"' | cut -f1 -d" " | wc -l);
+lin = "";
+for i in `cut -f1,11 -d" " $1 | grep '"-"' | cut -f1 -d" " | sort | uniq -c | sort -r | head -n 10`;
+do if [[ $i =~ ^[0-9]+$ ]]; then
+lin=$i;
+else printf "$i - $lin - $(echo "scale=4; $lin*100/$lines" | bc -l) %%\n"; fi
+done
+
+
+
+
+
+
+
 
 # run this script as "top10 log.txt"
 
